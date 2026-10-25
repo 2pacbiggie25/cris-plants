@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "cris-plants",
+    "name": "CrisPlants",
     "slug": "cris-plants",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,11 +8,14 @@
     "scheme": "crisplants",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/images/icon.png",
+      "bundleIdentifier": "com.cristopher.crisplants",
+      "supportsTablet": false
     },
     "android": {
+      "package": "com.cristopher.crisplants",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#1F5C39",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -28,9 +31,22 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#1F5C39",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 240
+        }
+      ],
+      "expo-sqlite",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "CrisPlants usa la cámara para fotografiar e identificar plantas."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "CrisPlants accede a tus fotos para identificar plantas desde la galería."
         }
       ]
     ],
