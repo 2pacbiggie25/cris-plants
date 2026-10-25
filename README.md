@@ -1,56 +1,44 @@
-# Welcome to your Expo app 👋
+# 🌿 CrisPlants
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App móvil (Expo / React Native) para **identificar plantas con la cámara** y consultar **para qué sirven en términos medicinales**.
 
-## Get started
+## Funciones
 
-1. Install dependencies
+- **Escáner** con cámara o desde la galería, usando la API de [Pl@ntNet](https://my.plantnet.org/).
+- **Otras coincidencias:** si la primera no convence, eliges entre las 5 candidatas.
+- **Información medicinal** en español: usos, parte usada, preparación y precauciones (catálogo local de ~59 plantas, funciona sin internet).
+- **Catálogo** con buscador por nombre o por uso ("sueño", "digestión"...).
+- **Historial** con foto de referencia, favoritas y notas personales (SQLite).
+- **Caché de identificaciones:** la misma foto no gasta otra petición a la API.
+- Modo claro y oscuro.
 
-   ```bash
-   npm install
-   ```
+> ⚠️ La información medicinal es orientativa, basada en usos tradicionales, y **no sustituye el consejo de un profesional de la salud**.
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Puesta en marcha
 
 ```bash
-npm run reset-project
+npm install
+cp .env.example .env     # y pon tu clave de Pl@ntNet
+npx expo start -c
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Abre la app con **Expo Go** (misma versión de SDK que el proyecto) escaneando el QR.
 
-### Other setup steps
+La clave se obtiene gratis en <https://my.plantnet.org/>. El archivo `.env` está en `.gitignore`: **nunca lo subas**.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Generar la app (APK de Android)
 
-## Learn more
+```bash
+npm i -g eas-cli
+eas login
+eas env:create --name EXPO_PUBLIC_PLANTNET_KEY --value "TU_CLAVE" --environment preview --visibility sensitive
+eas build -p android --profile preview
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Al terminar, EAS entrega un enlace para descargar e instalar el `.apk`.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+> Las variables `EXPO_PUBLIC_*` quedan dentro de la app compilada. Para uso personal es aceptable; si la app se hace pública, conviene poner un servidor intermedio que guarde la clave.
 
-## Join the community
+## Stack
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Expo SDK 58 · Expo Router · expo-camera · expo-image-picker · expo-sqlite · expo-file-system · React Native Reanimated
